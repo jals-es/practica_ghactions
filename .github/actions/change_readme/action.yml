@@ -1,0 +1,9 @@
+name: 'change_readme'
+description: 'Añadir badge a readme dependiendo del resultado de los tests'
+inputs:
+  cypress:
+    description: 'Cypress Outcome'
+    required: true
+runs:
+  using: 'node12'
+  main: 'dist/index.js

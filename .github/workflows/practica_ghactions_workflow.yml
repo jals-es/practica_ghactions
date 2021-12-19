@@ -39,3 +39,32 @@ jobs:
         with:
           name: result.txt
           path: result.txt
+
+  add_badge_job:
+
+    runs-on: ubuntu-latest
+    if: always()
+    needs: cypress_job
+    
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: result.txt
+      
+      - run: echo "::set-output name=cypress_outcome::$(cat result.txt)"
+        id: cypress
+      
+      - uses: ./.github/actions/change_readme/
+        id: readme
+        with:
+          cypress: ${{ steps.cypress.outputs.cypress_outcome }}
+      
+      - run: | 
+            git config user.email "juan.antonio.lis@gmail.com"
+            git config user.name "jals-es"
+            git pull
+            git add .
+            git commit --allow-empty -m "Readme" 
+            git remote set-url origin https://jals-es:${{ secrets.TOKEN_GITHUB }}@github.com/jals-es/practica_ghactions.git
+            git push

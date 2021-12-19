@@ -1,0 +1,15 @@
+{
+  "name": "change_readme",
+  "version": "1.0.0",
+  "description": "Añadir badge a readme",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "author": "Juan Antonio",
+  "license": "ISC",
+  "dependencies": {
+    "@actions/core": "^1.6.0",
+    "fs": "0.0.1-security"
+  }
+}
