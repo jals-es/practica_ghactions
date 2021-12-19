@@ -1,4 +1,5 @@
-# practica_ghactions
+# PRACTICA GITHUB ACTIONS
+En este README incluyo la documentacion de la practica de Github Actions.
 
 ## RESULTADO DE LOS ÚLTIMOS TESTS
 <!---Start place for the badge -->
