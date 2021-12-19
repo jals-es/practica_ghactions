@@ -1,0 +1,33 @@
+name: 'send_email'
+description: 'Enviar resultados por email'
+inputs:
+  linter:
+    description: 'Linter'
+    required: true
+  cypress:
+    description: 'Cypress'
+    required: true
+  badge:
+    description: 'Badge'
+    required: true
+  deploy:
+    description: 'Deploy'
+    required: true
+  email_host:
+    description: 'Host Email'
+    required: true
+  email_port:
+    description: 'Port Email'
+    required: true
+  email_user:
+    description: 'User Email'
+    required: true
+  email_pass:
+    description: 'Pass Email'
+    required: true
+  email_to:
+    description: 'A quien se envia'
+    required: true
+runs:
+  using: 'node12'
+  main: 'dist/index.js'

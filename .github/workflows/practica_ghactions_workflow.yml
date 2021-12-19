@@ -84,3 +84,25 @@ jobs:
           vercel-org-id: ${{ secrets.ORG_ID}}
           vercel-project-id: ${{ secrets.PROJECT_ID}}
           working-directory: ./
+
+  notification_job:
+
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [linter_job, cypress_job, add_badge_job, deploy_job ]
+    
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: ./.github/actions/send_email/
+        id: send_email
+        with:
+          linter: ${{ needs.linter_job.result }}
+          cypress:  ${{ needs.cypress_job.result }}
+          badge:  ${{ needs.add_badge_job.result }}
+          deploy:  ${{ needs.deploy_job.result }}
+          email_host: 'smtp.ionos.es'
+          email_port: 587
+          email_user: ${{ secrets.EMAIL_USER }}
+          email_pass: ${{ secrets.EMAIL_PASS }}
+          email_to: "narzano.nar@gmail.com"
