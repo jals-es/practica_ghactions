@@ -101,8 +101,8 @@ jobs:
           cypress:  ${{ needs.cypress_job.result }}
           badge:  ${{ needs.add_badge_job.result }}
           deploy:  ${{ needs.deploy_job.result }}
-          email_host: 'smtp.ionos.es'
+          email_host: smtp.ionos.es
           email_port: 587
           email_user: ${{ secrets.EMAIL_USER }}
           email_pass: ${{ secrets.EMAIL_PASS }}
-          email_to: "narzano.nar@gmail.com"
+          email_to: narzano.nar@gmail.com
