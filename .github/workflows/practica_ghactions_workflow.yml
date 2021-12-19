@@ -1,0 +1,41 @@
+name: Practica GHActions Workflow
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+
+  linter_job:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm install
+      - run: npm run lint
+
+  cypress_job:
+
+    runs-on: ubuntu-latest
+    needs: linter_job
+
+    env:
+      GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+    
+    steps:
+      - uses: actions/checkout@v2
+      
+      - uses: cypress-io/github-action@v2
+        id: cypress
+        continue-on-error: true
+        with:
+          config-file: cypress.json
+          build: npm run build
+          start: npm start
+
+      - run: echo ${{ steps.cypress.outcome }} > result.txt
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: result.txt
+          path: result.txt
